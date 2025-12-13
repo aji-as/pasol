@@ -1,14 +1,83 @@
+<?php 
+require_once "../config.php";
+
+if ($_POST['proses']){
+    $id = $_POST['id'];
+    $status = get_order_by_id($id)['status_pesanan'];
+    if($status == "menunggu"){
+        update_status($id,"diproses");
+    }elseif($status == "diproses"){
+        update_status($id,"diantar");
+    }else{
+
+    }
+
+}
+
+
+            
+$status = $_POST['status'];
+
+if (isset($status) && $status != "all") {
+    $orders = get_order_from_produk_by_status(
+        $id_user,
+        $status
+);
+} else {
+    $orders = get_order_from_produk($id_user); 
+
+}
+
+
+?>
+
+
+
+
+
+
+
 <div class="p-4 md:p-8 bg-gray-50 min-h-screen">
-    <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 border-b-4 border-green-600 pb-2 inline-flex items-center gap-2 tracking-tight">
-        📦 Daftar Pesanan Masuk
-    </h2>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-3">
+
+        <!-- JUDUL -->
+        <h2 class="text-lg md:text-xl font-bold text-gray-900">
+            Daftar Pesanan Masuk
+        </h2>
+
+        <!-- SELECT FILTER KATEGORI -->
+        <form method="post" class="w-full md:w-auto">
+            <select 
+                name="status" 
+                onchange="this.form.submit()" 
+                class="w-full md:w-56 px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+                <option value="all">Semua Status</option>
+                    <option value="menunguu" 
+                        <?php if($status == "menunguu") echo "selected"; ?>>
+                        Menunggu
+                    </option>
+                    <option value="diproses" 
+                        <?php if($status == "diproses") echo "selected"; ?>>
+                        Diproses
+                    </option>
+                    <option value="diantar" 
+                        <?php if($status == "diantar") echo "selected"; ?>>
+                        Diantar
+                    </option>
+                    <option value="selesai" 
+                        <?php if($status == "selesai") echo "selected"; ?>>
+                        Selesai
+                    </option>
+
+            </select>
+        </form>
+
+    </div>
+
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <?php
-            require_once "../config.php";
-            
-            // Mengambil pesanan yang masuk ke penjual
-            $orders = get_order_from_produk($id_user); 
             
             foreach($orders as $order){
                 $produk = get_produk_by_id($order["product_id"]);
@@ -28,7 +97,7 @@
                     $statusColor = 'bg-yellow-100 text-yellow-800 border-yellow-200';
                     if(strtolower($order["status_pesanan"]) == 'dikirim') $statusColor = 'bg-blue-100 text-blue-800 border-blue-200';
                     if(strtolower($order["status_pesanan"]) == 'selesai') $statusColor = 'bg-green-100 text-green-800 border-green-200';
-                    if(strtolower($order["status_pesanan"]) == 'batal') $statusColor = 'bg-red-100 text-red-800 border-red-200';
+                    if(strtolower($order["status_pesanan"]) == 'diproses') $statusColor = 'bg-red-100 text-red-800 border-red-200';
                 ?>
                 <span class="absolute top-3 left-3 <?php echo $statusColor; ?> text-[10px] md:text-xs font-bold px-3 py-1 rounded-full shadow-sm border backdrop-blur-sm">
                     <?php echo ucfirst($order["status_pesanan"]) ?>
@@ -69,14 +138,26 @@
                 
                 <div class="grid grid-cols-2 gap-3 pt-2 mt-auto border-t border-gray-100">
                     <a href="./?page=detail-pesanan&id=<?php echo $order['id']; ?>" 
-                       class="flex items-center justify-center px-4 py-2 bg-white text-gray-700 text-sm font-semibold rounded-lg border border-gray-300 hover:bg-gray-50 hover:text-gray-900 transition focus:ring-2 focus:ring-gray-200">
+                        class="flex items-center justify-center px-4 py-2 bg-white text-gray-700 text-sm font-semibold rounded-lg border border-gray-300 hover:bg-gray-50 hover:text-gray-900 transition focus:ring-2 focus:ring-gray-200">
                         Detail
                     </a>
-
-                    <a href="proses_pesanan.php?id=<?php echo $order['id_pesanan']; ?>" 
-                       class="flex items-center justify-center px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 transition shadow-md hover:shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-1">
-                        Proses
-                    </a>
+                    <form method="POST" >
+                        <?php 
+                            $status = $order['status_pesanan'];
+                            if($status == "menunggu"){
+                                $status_ = "Proses";
+                            
+                            }elseif($status == "diproses"){
+                                    $status_ = "Kirim";
+                                    
+                                }elseif($status == "diantar"){
+                                    $status_ = "Diantar";
+                            }else{
+                                $status_ = "Selesai";
+                            }?>
+                        <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
+                        <input value="<?php echo  $status_?>" name="proses"    type="submit" class="flex items-center justify-center px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg w-full hover:bg-green-700 transition shadow-md hover:shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-1">
+                    </form>
                 </div>
             </div>
         </div>

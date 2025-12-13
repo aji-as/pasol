@@ -4,12 +4,39 @@ $id_order = $_GET['id'];
 require_once "../config.php";
 $order = get_order_by_id($id_order); 
 
+$status = get_order_by_id($id_order)['status_pesanan'];
+
+
+
+if ($_POST['proses']){
+    if($status == "menunggu"){
+        update_status($id_order,"diproses");
+    }elseif($status == "diproses"){
+        update_status($id_order,"diantar");
+    }
+
+}
+
+
+if($status == "menunggu"){
+    $status_ = "Proses";
+   
+}elseif($status == "diproses"){
+        $status_ = "Kirim";
+        
+}elseif($status == "diantar"){
+        $status_ = "Diantar";
+    }
+elseif($status == "selesai"){
+        $status_ = "Pesanan selesai";
+    }
+
 
 // Helper untuk warna status (Sama seperti di card dashboard)
 $status = strtolower($order['status_pesanan']);
-$badgeColor = 'bg-yellow-100 text-yellow-800 border-yellow-200'; // Default: Menunggu
-if($status == 'proses') $badgeColor = 'bg-blue-100 text-blue-800 border-blue-200';
-if($status == 'dikirim') $badgeColor = 'bg-indigo-100 text-indigo-800 border-indigo-200';
+$badgeColor = 'bg-yellow-100 text-yellow-800 border-yellow-200'; 
+if($status == 'diproses') $badgeColor = 'bg-blue-100 text-blue-800 border-blue-200';
+if($status == 'diantar') $badgeColor = 'bg-indigo-100 text-indigo-800 border-indigo-200';
 if($status == 'selesai') $badgeColor = 'bg-green-100 text-green-800 border-green-200';
 if($status == 'menunggu') $badgeColor = 'bg-red-100 text-red-800 border-red-200';
 ?>
@@ -18,7 +45,7 @@ if($status == 'menunggu') $badgeColor = 'bg-red-100 text-red-800 border-red-200'
     
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div class="flex items-center gap-3">
-            <a href="dashboard_penjual.php" class="p-2 rounded-lg bg-white border border-gray-200 text-gray-600 hover:bg-gray-100 transition shadow-sm">
+            <a href="./?page=pesanan-masuk" class="p-2 rounded-lg bg-white border border-gray-200 text-gray-600 hover:bg-gray-100 transition shadow-sm">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
             <div>
@@ -137,33 +164,12 @@ if($status == 'menunggu') $badgeColor = 'bg-red-100 text-red-800 border-red-200'
             <div class="bg-white rounded-xl shadow-md border border-gray-100 p-6">
                 <h3 class="font-bold text-gray-800 mb-4 text-sm">Update Status Pesanan</h3>
                 <div class="flex flex-col gap-3">
-                    <?php if($order['status_pesanan'] == 'menunggu'): ?>
-                        <form action="proses_update.php" method="POST">
-                            <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
-                            <input type="hidden" name="status" value="proses">
-                            <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg shadow hover:bg-green-700 transition transform hover:-translate-y-0.5">
-                                Terima & Proses Pesanan
-                            </button>
-                        </form>
-                        <form action="proses_update.php" method="POST">
-                            <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
-                            <input type="hidden" name="status" value="batal">
-                            <button type="submit" class="w-full bg-white text-red-600 font-bold py-3 px-4 rounded-lg border border-red-200 hover:bg-red-50 transition">
-                                Tolak Pesanan
-                            </button>
-                        </form>
-                    <?php elseif($order['status_pesanan'] == 'proses'): ?>
-                        <button class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow hover:bg-indigo-700 transition">
-                            Kirim Pesanan
-                        </button>
-                    <?php else: ?>
-                        <div class="text-center p-3 bg-gray-50 rounded-lg border border-gray-200 text-gray-500 text-sm">
-                            Tidak ada aksi tersedia untuk status ini.
-                        </div>
-                    <?php endif; ?>
+                    <form method="POST" >
+                        <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
+                        <input value="<?php echo $status_?>" name="proses"    type="submit" class="flex items-center justify-center px-4 py-2 text-white bg-green-500 text-sm font-semibold rounded-lg hover:bg-green-700 transition shadow-md hover:shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-1">
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

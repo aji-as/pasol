@@ -3,18 +3,31 @@ require_once "../config.php";
 $id = $_GET['id'];
 $user =get_user_by_id($id);
 
-// Helper Warna Role
+
 $roleColor = 'text-gray-600 bg-gray-50 border-gray-200';
-if($user['role'] == 'admin') $roleColor = 'text-purple-700 bg-purple-50 border-purple-200';
-if($user['role'] == 'penjual') $roleColor = 'text-[#00A651] bg-[#00A651]/10 border-green-200';
-if($user['role'] == 'pembeli') $roleColor = 'text-blue-700 bg-blue-50 border-blue-200';
+if($user['role'] == 'admin'){   
+     $roleColor = 'text-purple-700 bg-purple-50 border-purple-200';
+
+}   
+if($user['role'] == 'penjual'){
+    $roleColor = 'text-[#00A651] bg-[#00A651]/10 border-green-200';
+    $ur = "daftar-pembeli";
+} 
+if($user['role'] == 'pembeli'){
+    $ur = "daftar-pembeli";
+    $roleColor = 'text-blue-700 bg-blue-50 border-blue-200';
+} 
+
+
+
+
 ?>
 
 <div class="max-w-5xl mx-auto p-4 md:p-8 bg-gray-50 min-h-screen font-sans">
     
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div class="flex items-center gap-4">
-            <a href="daftar_users.php" class="p-2.5 bg-white rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-100 transition shadow-sm">
+            <a href="./?page=<?php echo $ur ?>" class="p-2.5 bg-white rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-100 transition shadow-sm">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             </a>
             <div>

@@ -9,6 +9,9 @@ switch($page){
     case 'daftar-pesanan':
         require_once 'daftar_pesanan.php';
         break;
+    case "detail-pesanan":
+        require_once 'detail_pesanan.php';
+        break;
     default:
         require_once 'daftar_pesanan.php';
         break;

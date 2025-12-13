@@ -24,6 +24,12 @@ switch($page){
     case 'daftar-pesanan':
         require_once 'daftar_pesanan.php';
         break;
+    case 'detail-order':
+        require_once 'detail_order.php';
+        break;
+    case 'home':
+        header("location:../Home/index.php");
+        exit;
     case 'logout':
         require_once '../logout.php';
         break;

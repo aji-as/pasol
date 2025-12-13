@@ -119,14 +119,19 @@
 <body class="bg-bg-light flex font-poppins">
 
     <aside class="w-64 bg-sidebar-bg shadow-xl hidden md:flex flex-col fixed top-0 left-0 h-screen z-40">
-        <div class="flex items-center justify-center h-20 ">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-xl">P</span>
+        
+        <a href="../Home/?page=home">
+            <div class="flex items-center justify-center h-20 ">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">P</span>
+                    </div>
+                    <span class="text-2xl font-extrabold text-dark">PASOL</span>
                 </div>
-                <span class="text-2xl font-extrabold text-dark">PASOL</span>
-            </div>
-        </div>
+             </div>
+        </a>
+            
+       
         <nav class="flex-1 p-4 space-y-2"> 
             <a href="./?page=profile" class="flex items-center space-x-3 px-4 py-3 text-dark font-medium rounded-xl hover:bg-gray-50 transition duration-150">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,7 +219,7 @@
 
         <main class="">
             <?php
-                // Asumsi file route.php ada dan menangani konten
+
                 require_once 'route.php'; 
             ?>
         </main>

@@ -27,7 +27,7 @@ if ($_POST['simpan']) {
 
         <div class='flex-1'>
             <h4 class='text-sm font-bold text-gray-900'>Berhasil!</h4>
-            <p class='text-sm text-gray-500 mt-0.5'>Sukses</p>
+            <p class='text-sm text-gray-500 mt-0.5'>Berhasil menambahkan pembeli</p>
         </div>
 
         <button onclick='closeAlert()' class='text-gray-400 hover:text-gray-600 transition'>
@@ -90,21 +90,19 @@ if ($_POST['simpan']) {
 
 
 
-
-
 <div class="max-w-5xl mx-auto p-4 md:p-8 bg-gray-50 min-h-screen font-sans">
-
+    
     <div class="flex items-center gap-4 mb-8">
         <a href="./?page=daftar-pembeli" class="p-2 bg-white rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 transition shadow-sm">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         </a>
         <div>
             <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Tambah Pengguna Baru</h2>
-            <p class="text-sm text-gray-500">Buat akun baru untuk Pembeli</p>
+            <p class="text-sm text-gray-500">Buat akun baru untuk Penjual</p>
         </div>
     </div>
 
-    <form method="post">
+    <form action="#" method="post">
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             
@@ -166,8 +164,19 @@ if ($_POST['simpan']) {
                         <div class="mb-5">
                             <label class="block text-sm font-bold text-gray-700 mb-2">Role Pengguna</label>
                             <div class="relative">
-                                <input readonly value="Pembeli"
+                                 <div class="relative">
+                                <input readonly value="pembeli"
                                     class="w-full pl-11 pr-12 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition text-gray-700 bg-gray-50 focus:bg-white">
+                            </div>
+                                <!-- <select name="role" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none bg-gray-50 focus:bg-white text-gray-700 cursor-pointer">
+                                    <option value="" disabled selected>Pilih Role...</option>
+                                    <option value="pembeli">Pembeli</option>
+                                    <option value="penjual">Penjual</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-gray-500">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div> -->
                             </div>
                         </div>
 
@@ -194,7 +203,6 @@ if ($_POST['simpan']) {
                         </a>
                         <input value="Simpan" name="simpan" type="submit" class="px-8 py-3 bg-green-600 text-white rounded-lg font-bold shadow-lg hover:bg-green-700 hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
                            
-                            
                     </div>
                 </div>
             </div>

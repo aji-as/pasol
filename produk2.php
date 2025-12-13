@@ -1,7 +1,7 @@
 <?php 
-require_once "../config.php";
+require_once "config.php";
 
-// 1. Default: Ambil semua produk
+error_reporting(0);
 
 
 $keyword = $_POST['keyword'];
@@ -74,7 +74,7 @@ if (isset($_POST["pilih_kategori"])) {
             </form>
 
             <?php 
-            require_once "../config.php";
+            require_once "config.php";
             $catagories = get_all_kategori(); 
             
             foreach($catagories as $kategori){
@@ -110,24 +110,15 @@ if (isset($_POST["pilih_kategori"])) {
                 ?>
             
                 <div class="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 group">
-                   <div class="aspect-[4/3] bg-gray-100 overflow-hidden relative group">
+                    <div class="aspect-[4/3] bg-gray-100 overflow-hidden relative">
                         <img src="../Media/<?php echo $produk['foto_produk']; ?>"
                             alt="Produk"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-
-                        <!-- Label Kategori (Kiri Atas) -->
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        
                         <span class="absolute top-3 left-3 px-2.5 py-1 text-xs font-bold bg-white/90 backdrop-blur-sm text-green-700 rounded-lg shadow-sm">
                             <?php echo get_kategori_by_id($produk["kategori_id"]) ?>
                         </span>
-
-                        <!-- Label Stok (Kanan Atas) -->
-                        <span class="absolute top-3 right-3 px-2.5 py-1 text-xs font-bold
-                                    bg-black/30 backdrop-blur-md border border-white/40
-                                    text-white rounded-lg shadow-sm">
-                            Stok: <?php echo ($produk["stok"]); ?>
-                        </span>
                     </div>
-
 
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-2">
@@ -154,18 +145,10 @@ if (isset($_POST["pilih_kategori"])) {
                                     Rp <?php echo number_format($produk['harga'], 0, ',', '.'); ?>
                                 </span>
                             </div>
-                            <?php if($produk['penjual_id']!=$id){ ?>
-                            <a href="./?page=chekout&id=<?php echo $produk['id'] ?>" 
+                            <a href="login.php" 
                             class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 active:scale-95 transition-all shadow-green-200 shadow-lg">
                                 Beli Sekarang
                             </a>
-                            <?php } else{ ?>
-                                <button 
-                                disabled
-                                class="px-4 py-2 bg-yellow-300 border border-yellow-500 text-yellow-700 text-sm font-semibold rounded-xl cursor-not-allowed">
-                                Produk Anda
-                                </button>
-                            <?php } ?>
                         </div>
                     </div>
                 </div>

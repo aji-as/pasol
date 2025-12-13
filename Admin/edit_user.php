@@ -84,7 +84,17 @@ if ($_POST['simpan']) {
 
 }
 
-$user = get_user_by_id($id)
+$user = get_user_by_id($id);
+
+
+if($user['role'] == 'penjual'){
+    $ur = "daftar-pembeli";
+} 
+if($user['role'] == 'pembeli'){
+    $ur = "daftar-pembeli";
+   
+} 
+
 
 ?>
 
@@ -96,7 +106,8 @@ $user = get_user_by_id($id)
 
 <div class="max-w-5xl mx-auto p-4 md:p-8 bg-gray-50 min-h-screen font-sans">
      <div class="flex items-center gap-4 mb-8">
-        <a href="./?page=daftar-pembeli" class="p-2 bg-white rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 transition shadow-sm">
+
+        <a href="./?page=<?php echo $ur ?>" class="p-2 bg-white rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 transition shadow-sm">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         </a>
         <div>

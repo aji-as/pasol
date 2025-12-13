@@ -102,7 +102,7 @@ if ($_POST['simpan']) {
         </div>
     </div>
 
-    <form action="proses_tambah_user.php" method="POST">
+    <form action="" method="POST">
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             
@@ -202,7 +202,6 @@ if ($_POST['simpan']) {
                             Batal
                         </a>
                         <input value="Simpan" name="simpan" type="submit" class="px-8 py-3 bg-green-600 text-white rounded-lg font-bold shadow-lg hover:bg-green-700 hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
-                           
                            
                     </div>
                 </div>

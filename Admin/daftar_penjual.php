@@ -116,7 +116,7 @@
     
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Daftar Pembeli</h2>
+            <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Daftar Penjual</h2>
             <p class="text-sm text-gray-500">Kelola data pelanggan</p>
         </div>
 
@@ -136,7 +136,7 @@
 
             <a href="./?page=tambah-penjual" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-green-700 transition shadow-md">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                <span>Tambah</span>
+                <span>Tambah</span> 
             </a>
         </div>
     </div>

@@ -1,13 +1,17 @@
 <?php
 
-$page = $_GET['page'] ?? 'login';
+$page = $_GET['page']?? 'home';
 
 
 switch ($page) {
-    case 'login':
-        require_once 'login.php';
+
+    case 'home':
+        require_once 'home_note_login.php';
+        break;
+    case 'produk':
+        require_once 'produk2.php';
         break;
     default:
-        echo "Halaman tidak ditemukan.";
+        require_once 'home_note_login.php';
         break;
 }
